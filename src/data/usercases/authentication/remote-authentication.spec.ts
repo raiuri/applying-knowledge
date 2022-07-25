@@ -1,8 +1,8 @@
 import { describe, test, expect } from 'vitest'
-import { HttpPostClientSpy } from '../../mocks/mock-http-client'
 import { RemoteAuthentication } from './remote-authentication'
+import { HttpPostClientSpy } from 'src/data/mocks/mock-http-client'
+import { mockAuthentication } from 'src/domain/mocks/mock-authentication'
 import { faker } from '@faker-js/faker'
-import { mockAuthentication } from '../../../domain/mocks/mock-authentication'
 
 type SutTypes = {
   sut: RemoteAuthentication,
