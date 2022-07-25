@@ -4,9 +4,9 @@ export class RemoteAuthentication {
   constructor(
     private readonly url: string,
     private readonly httpClient: HttpPostClient
-    ) {}
+  ) { }
 
   async auth(): Promise<void> {
-    this.httpClient.post(this.url)
+    this.httpClient.post({ url: this.url })
   }
 }
