@@ -1,12 +1,11 @@
 import { describe, test, expect } from 'vitest'
 import { RemoteAuthentication } from './remote-authentication'
-import { HttpPostClientSpy } from '../../../data/mocks/mock-http-client'
-import { mockAccountModel, mockAuthentication } from '../../../domain/mocks/mock-account'
-import { InvalidCredentialsError } from '../../../domain/errors/invalid-credential-error'
-import { HttpStatusCode } from '../../protocols/http/http-response'
-import { UnexpectedError } from '../../../domain/errors/unexpected-error'
-import { AuthenticationParams } from '../../../domain/usercases/authentication'
-import { AccountModel } from '../../../domain/models/account-model'
+import { HttpPostClientSpy} from '../../../data/mocks'
+import { HttpStatusCode } from '../../protocols/http'
+import { mockAccountModel, mockAuthentication } from '../../../domain/mocks/'
+import { InvalidCredentialsError, UnexpectedError } from '../../../domain/errors/'
+import { AuthenticationParams } from '../../../domain/usercases'
+import { AccountModel } from '../../../domain/models'
 import { faker } from '@faker-js/faker'
 
 type SutTypes = {
