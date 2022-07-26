@@ -1,7 +1,9 @@
 import { describe, test, expect } from 'vitest'
 import { RemoteAuthentication } from './remote-authentication'
-import { HttpPostClientSpy } from 'src/data/mocks/mock-http-client'
-import { mockAuthentication } from 'src/domain/mocks/mock-authentication'
+import { HttpPostClientSpy } from '../../../data/mocks/mock-http-client'
+import { mockAuthentication } from '../../../domain/mocks/mock-authentication'
+import { InvalidCredentialsError } from '../../../domain/errors/invalid-credential-error'
+import { HttpStatusCode } from '../../protocols/http/http-response'
 import { faker } from '@faker-js/faker'
 
 type SutTypes = {
@@ -34,5 +36,15 @@ describe('RemoteAuthentication', () => {
     await sut.auth(authenticationParams)
 
     expect(httpPostClientSpy.body).toEqual(authenticationParams)
+  })
+
+  test('Should throw IvalidCredentialError if HttpPostClietn returns 401', async () => {
+    const { sut, httpPostClientSpy } = makeSut()
+    httpPostClientSpy.response = {
+      statusCode: HttpStatusCode.unathorized
+    }
+    const promise = sut.auth(mockAuthentication())
+  
+    await expect(promise).rejects.toThrow(new InvalidCredentialsError())
   })
 })
