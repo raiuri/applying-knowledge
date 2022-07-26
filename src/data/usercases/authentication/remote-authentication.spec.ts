@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest'
 import { RemoteAuthentication } from './remote-authentication'
 import { HttpPostClientSpy } from '../../../data/mocks/mock-http-client'
-import { mockAuthentication } from '../../../domain/mocks/mock-authentication'
+import { mockAccountModel, mockAuthentication } from '../../../domain/mocks/mock-account'
 import { InvalidCredentialsError } from '../../../domain/errors/invalid-credential-error'
 import { HttpStatusCode } from '../../protocols/http/http-response'
 import { UnexpectedError } from '../../../domain/errors/unexpected-error'
@@ -79,6 +79,18 @@ describe('RemoteAuthentication', () => {
     const promise = sut.auth(mockAuthentication())
   
     await expect(promise).rejects.toThrow(new UnexpectedError())
+  })
+
+  test('Should return an Account if HttpPostClient returns 200', async () => {
+    const { sut, httpPostClientSpy } = makeSut()
+    const httpResult = mockAccountModel()
+    httpPostClientSpy.response = {
+      statusCode: HttpStatusCode.ok,
+      body: httpResult
+    }
+    const account = await sut.auth(mockAuthentication())
+  
+    await expect(account).toEqual(httpResult)
   })
 
 })
