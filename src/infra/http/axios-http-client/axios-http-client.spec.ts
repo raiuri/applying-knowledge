@@ -15,14 +15,12 @@ const mockPostRequest = (): HttpPostParams<any> => ({
   body: faker.datatype.json()
 })
 
-console.log("AAAAAAAAAAA", faker.datatype.json())
-
 describe('AxiosHttpClient', () => {
-  test('should call axios with correct URL and verb', async () => {
+  test('should call axios with correct values', async () => {
     const request = mockPostRequest()
     const sut = makeSut()
     await sut.post(request)
 
-    expect(mockedAxios.post).toHaveBeenCalledWith(request.url)
+    expect(mockedAxios.post).toHaveBeenCalledWith(request.url, request.body)
   })
 })
