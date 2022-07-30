@@ -1,12 +1,11 @@
 {
   "name": "applying-knowledge",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "test": "jest",
     "test:watch": "npm test -- --watch",
-    "test:changed": "vitest -- --changed",
+    "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",
     "prepare": "husky install",
     "dev": "vite",

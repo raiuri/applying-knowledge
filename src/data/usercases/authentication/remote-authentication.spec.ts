@@ -1,4 +1,3 @@
-import { describe, test, expect } from 'vitest'
 import { RemoteAuthentication } from './remote-authentication'
 import { HttpPostClientSpy} from '../../../data/mocks'
 import { HttpStatusCode } from '../../protocols/http'
@@ -89,7 +88,7 @@ describe('RemoteAuthentication', () => {
     }
     const account = await sut.auth(mockAuthentication())
   
-    await expect(account).toEqual(httpResult)
+    expect(account).toEqual(httpResult)
   })
 
 })
